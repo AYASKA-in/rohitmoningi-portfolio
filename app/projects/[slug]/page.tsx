@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { projectMap, projects } from "@/components/portfolio-data";
 import { ProjectContent } from "@/components/project-content";
 
-const BASE_URL = "https://rohitmoningi.vercel.app";
+const BASE_URL = "https://rohitmoningi.in";
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;

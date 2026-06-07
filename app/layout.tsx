@@ -3,7 +3,7 @@ import "./globals.css";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { LenisProvider } from "@/components/lenis-provider";
 
-const BASE_URL = "https://rohitmoningi.vercel.app";
+const BASE_URL = "https://rohitmoningi.in";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

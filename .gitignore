@@ -2,3 +2,5 @@ node_modules
 .next
 tsconfig.tsbuildinfo
 next-env.d.ts
+
+.vercel

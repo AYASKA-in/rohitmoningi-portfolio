@@ -65,7 +65,7 @@ export default async function Image({ params }: Props) {
           >
             <span style={{ fontSize: 18, fontWeight: 700, color: "#fafaf9" }}>R</span>
           </div>
-          <span style={{ fontSize: 15, fontWeight: 400, color: "#a8a29e" }}>rohitmoningi.vercel.app</span>
+          <span style={{ fontSize: 15, fontWeight: 400, color: "#a8a29e" }}>rohitmoningi.in</span>
         </div>
 
         <div style={{ display: "flex", flex: 1, flexDirection: "column", justifyContent: "center", gap: 16 }}>
