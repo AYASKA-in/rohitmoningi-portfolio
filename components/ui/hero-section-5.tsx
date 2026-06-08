@@ -294,9 +294,7 @@ const HeroHeader = () => {
             className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             aria-label="home"
           >
-            <div className="flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-stone-800 to-stone-950 text-stone-50 shadow-inner">
-              <span className="text-sm font-semibold tracking-[-0.04em]">MR</span>
-            </div>
+            <img src="/logo.svg" alt="Moningi Rohit" className="size-10 shrink-0" />
             <div className="leading-snug">
               <p className="text-sm font-semibold tracking-[-0.02em] text-stone-950">
                 Moningi Rohit
