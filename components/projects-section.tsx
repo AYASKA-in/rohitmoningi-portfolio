@@ -99,7 +99,7 @@ export function ProjectsSection() {
           >
             <button
               onClick={handleShowAll}
-              className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white/80 px-5 py-2.5 text-sm text-stone-700 shadow-sm transition-all duration-200 hover:border-stone-400 hover:bg-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white/80 px-5 py-3.5 text-sm text-stone-700 shadow-sm transition-all duration-200 hover:border-stone-400 hover:bg-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               See all {projects.length} projects
               <ChevronDown className="size-4" />
@@ -223,7 +223,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 target="_blank"
                 rel="noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="relative z-10 text-sm text-stone-600 transition hover:text-stone-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                className="relative z-10 inline-flex min-h-[44px] items-center text-sm text-stone-600 transition hover:text-stone-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 {project.externalLabel ?? "Open Project"}
               </Link>

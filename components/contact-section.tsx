@@ -113,19 +113,19 @@ export function ContactSection() {
             <div className="flex flex-wrap gap-5">
               <Link
                 href="#projects"
-                className="text-sm text-stone-400 transition hover:text-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-50/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                className="inline-flex min-h-[44px] items-center text-sm text-stone-400 transition hover:text-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-50/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 Projects
               </Link>
               <Link
                 href="#experience"
-                className="text-sm text-stone-400 transition hover:text-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-50/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                className="inline-flex min-h-[44px] items-center text-sm text-stone-400 transition hover:text-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-50/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 Experience
               </Link>
               <Link
                 href="#skills"
-                className="text-sm text-stone-400 transition hover:text-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-50/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                className="inline-flex min-h-[44px] items-center text-sm text-stone-400 transition hover:text-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-50/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 Skills
               </Link>
@@ -169,7 +169,7 @@ export function SocialLink({ label, href }: { label: string; href: string }) {
         href={href}
         target="_blank"
         rel="me noreferrer"
-        className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-3 py-2 text-sm text-stone-700 transition hover:border-stone-900/15 hover:text-stone-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-black/8 bg-white px-3 py-3 text-sm text-stone-700 transition hover:border-stone-900/15 hover:text-stone-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
       >
         <Icon className="size-4" />
         {label}

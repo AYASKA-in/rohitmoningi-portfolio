@@ -27,7 +27,7 @@ export function SkillsSection() {
           </p>
         </Reveal>
 
-        <Stagger className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3">
           {skillCategories.map((category) => (
             <SkillCategory key={category.title} category={category} />
           ))}

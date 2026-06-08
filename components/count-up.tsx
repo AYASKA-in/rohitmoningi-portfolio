@@ -33,7 +33,7 @@ export function CountUp({
         {reduced ? target : <motion.span>{rounded}</motion.span>}
         {suffix && <span className="text-lg font-semibold tracking-[-0.03em] text-stone-950">{suffix}</span>}
       </span>
-      <span className="text-[11px] uppercase tracking-[0.12em] text-stone-500">{label}</span>
+      <span className="text-[11px] uppercase tracking-[0.12em] text-stone-500 sm:text-xs">{label}</span>
     </div>
   );
 }

@@ -250,7 +250,7 @@ export function ProjectContent({
             </div>
             <Link
               href="/#contact"
-              className="inline-flex shrink-0 items-center gap-2 rounded-full border border-stone-600/80 bg-stone-900 px-5 py-2.5 text-sm font-medium text-stone-50 transition-all duration-200 hover:bg-stone-800 hover:border-stone-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-50/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full border border-stone-600/80 bg-stone-900 px-5 py-3.5 text-sm font-medium text-stone-50 transition-all duration-200 hover:bg-stone-800 hover:border-stone-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-50/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Schedule a walkthrough
               <ArrowRight className="size-4" />

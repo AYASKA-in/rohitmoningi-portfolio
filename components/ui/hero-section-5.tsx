@@ -136,19 +136,19 @@ export function HeroSection() {
 
       <main id="main-content" className="relative z-10">
         <section className="mx-auto flex min-h-screen max-w-7xl items-center px-6 pb-12 pt-28 sm:pt-32 lg:px-12 lg:pb-16 lg:pt-32">
-          <div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(420px,0.98fr)] lg:gap-10">
+          <div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(min(420px,100%),0.98fr)] lg:gap-10">
             <div className="max-w-2xl">
               <motion.p
                 initial={reduced ? undefined : { y: 16, opacity: 0 }}
                 animate={reduced ? undefined : { y: 0, opacity: 1 }}
                 transition={{ duration: 0.45, ease: EASE }}
-                className="mb-5 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.28em] text-foreground/65 shadow-sm backdrop-blur"
+                className="mb-5 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.28em] text-foreground/65 shadow-sm backdrop-blur sm:text-xs"
               >
                 <Sparkles className="size-3.5 text-primary" />
                 Product-minded engineering
               </motion.p>
 
-              <motion.h1 className="max-w-xl text-balance text-4xl font-semibold leading-[0.95] tracking-[-0.04em] text-stone-950 sm:text-5xl xl:text-[4.25rem]">
+              <motion.h1 className="max-w-xl text-balance text-3xl font-semibold leading-[0.95] tracking-[-0.04em] text-stone-950 sm:text-4xl md:text-5xl xl:text-[4.25rem]">
                 {HEADLINE_WORDS.map((word, i) => (
                   <span key={i} className="inline-block overflow-hidden pb-0.5">
                     <motion.span
@@ -240,7 +240,7 @@ export function HeroSection() {
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="flex flex-col items-center gap-1 text-stone-400"
           >
-            <span className="text-[10px] uppercase tracking-[0.24em]">Scroll</span>
+            <span className="text-[10px] uppercase tracking-[0.24em] sm:text-xs">Scroll</span>
             <svg width="12" height="20" viewBox="0 0 12 20" fill="none" className="stroke-stone-400">
               <path d="M6 0V14M6 14L1 9M6 14L11 9" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -291,7 +291,7 @@ const HeroHeader = () => {
           >
           <Link
             href="/"
-            className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            className="flex items-center gap-3 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             aria-label="home"
           >
             <img src="/logo.svg" alt="Moningi Rohit" className="size-10 shrink-0" />
@@ -334,7 +334,7 @@ const HeroHeader = () => {
           <button
             onClick={() => setMenuState((value) => !value)}
             aria-label={menuState ? "Close Menu" : "Open Menu"}
-            className="relative flex size-10 items-center justify-center rounded-full border border-stone-200 bg-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent lg:hidden"
+            className="relative flex size-11 items-center justify-center rounded-full border border-stone-200 bg-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent lg:hidden"
           >
             <Menu className="size-5 transition group-data-[state=active]:scale-0 group-data-[state=active]:opacity-0" />
             <X className="absolute size-5 scale-0 opacity-0 transition group-data-[state=active]:scale-100 group-data-[state=active]:opacity-100" />
@@ -468,7 +468,19 @@ const HeroVisual = () => {
             </div>
           </div>
 
-          <div className="relative mt-6 h-[260px] rounded-[1.6rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]">
+          <div className="relative mt-6 h-[320px] sm:h-[260px] rounded-[1.6rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]">
+            <style>{`
+              @media (max-width: 639px) {
+                .floating-card {
+                  width: 90% !important;
+                  left: 5% !important;
+                  rotate: 0deg !important;
+                }
+                .floating-card:nth-child(1) { top: 4% !important; }
+                .floating-card:nth-child(2) { top: 34% !important; }
+                .floating-card:nth-child(3) { top: 64% !important; }
+              }
+            `}</style>
             <div className="absolute inset-x-6 top-6 h-px bg-white/10" />
             <div className="absolute inset-x-6 bottom-6 h-px bg-white/5" />
 
@@ -518,7 +530,7 @@ function FloatingProjectCard({
       }
       whileHover={reduced ? undefined : { y: -8, scale: 1.018 }}
       transition={softTransition(0.3)}
-      className="absolute w-[74%] rounded-[1.5rem] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.07))] p-4 shadow-[0_24px_40px_-26px_rgba(0,0,0,0.85)] backdrop-blur-md"
+      className="floating-card absolute w-[74%] rounded-[1.5rem] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.07))] p-4 shadow-[0_24px_40px_-26px_rgba(0,0,0,0.85)] backdrop-blur-md"
       style={{
         left: card.offsetX,
         top: card.offsetY,
@@ -527,7 +539,7 @@ function FloatingProjectCard({
         y: reduced ? 0 : cardY,
       }}
     >
-      <p className="text-[11px] uppercase tracking-[0.24em] text-stone-400">
+      <p className="text-[11px] uppercase tracking-[0.24em] text-stone-400 sm:text-xs">
         {card.tag}
       </p>
       <h3 className="mt-3 text-base font-medium text-stone-50">{card.title}</h3>
