@@ -45,7 +45,7 @@ test("cursor animation stops for keyboard, reduced motion and project previews",
 test("touch devices do not allocate or display the cursor animation", async ({ browser }) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const page = await context.newPage();
-  await page.goto("http://127.0.0.1:3000");
+  await page.goto(process.env.BASE_URL || "http://127.0.0.1:3000");
   const canvas = page.locator(".cursor-light");
   await expect(canvas).toHaveCSS("display", "none");
   await expect(canvas).toHaveAttribute("width", "0");

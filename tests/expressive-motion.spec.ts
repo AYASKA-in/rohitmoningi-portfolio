@@ -49,7 +49,7 @@ test("navigation marker follows pages and remains on Work for a case study", asy
 test("touch and reduced motion never activate poster tilt", async ({ browser, page }) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const phone = await context.newPage();
-  await phone.goto("http://127.0.0.1:3000/projects");
+  await phone.goto(new URL("/projects", process.env.BASE_URL || "http://127.0.0.1:3000").href);
   await phone.locator(".project-art").first().scrollIntoViewIfNeeded();
   await expect(phone.locator("[data-depth-active]")).toHaveCount(0);
   await context.close();

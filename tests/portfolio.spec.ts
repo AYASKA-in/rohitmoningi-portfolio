@@ -40,7 +40,7 @@ test("project preview supports focus, Escape, history and direct pages", async (
 test("preview close button returns to catalogue without losing filters", async ({ page }) => {
   await page.goto("/projects");
   await page.getByRole("searchbox").fill("ECG");
-  await page.locator(".catalogue-grid .project-card-link").click();
+  await page.getByRole("link", { name: "Explainable AI-Based ECG Heartbeat Classification — view project", exact: true }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.getByRole("button", { name: "Close project preview" }).click();
   await expect(page.getByRole("searchbox")).toHaveValue("ECG");

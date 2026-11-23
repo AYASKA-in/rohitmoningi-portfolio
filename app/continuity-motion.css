@@ -1,0 +1,57 @@
+/* Spatial continuity: keep the selected collection and surviving posters legible. */
+.filters button{position:relative;isolation:isolate;transition:color var(--motion-fast),border-color var(--motion-fast)}
+.filters button[aria-pressed=true]{background:transparent}
+.filter-selection{position:absolute;inset:-1px;z-index:-1;border-radius:inherit;background:#f0efeb;pointer-events:none;transform-origin:0 0}
+.catalogue-grid{position:relative;align-items:start}
+.catalogue-item{min-width:0}
+.detail-cover-visual{position:absolute;inset:0;overflow:hidden}
+
+/* No new scroll handler: supported browsers scrub this layer with native scrolling. */
+.hero-scroll-layer{position:absolute;inset:0;z-index:-3;pointer-events:none}
+.hero-scroll-layer .hero-scene{z-index:0}
+@supports(animation-timeline:scroll()){
+  @media(min-width:769px) and (prefers-reduced-motion:no-preference) and (forced-colors:none){
+    .hero{view-timeline-name:--hero-departure;view-timeline-axis:block}
+    .hero-scroll-layer{animation:hero-departure linear both;animation-timeline:--hero-departure;animation-range:exit 0% exit 100%}
+  }
+}
+@keyframes hero-departure{from{transform:translateY(0) scale(1)}to{transform:translateY(48px) scale(1.045)}}
+
+/* Existing navigation semantics remain immediate; display can transition visually. */
+.menu-icon{position:relative;display:block;width:20px;height:16px}
+.menu-icon>span{position:absolute;left:0;right:0;height:1.5px;top:4px;background:currentColor;transition:transform var(--motion-normal) var(--motion-ease)}
+.menu-icon>span+span{top:11px}
+.menu-toggle[aria-expanded=true] .menu-icon>span:first-child{transform:translateY(3.5px) rotate(45deg)}
+.menu-toggle[aria-expanded=true] .menu-icon>span+span{transform:translateY(-3.5px) rotate(-45deg)}
+@media(max-width:560px){
+  .mobile-nav{opacity:0;transform:translateY(-8px);transition:opacity var(--motion-fast) var(--motion-ease),transform var(--motion-fast) var(--motion-ease),display var(--motion-fast) allow-discrete}
+  .mobile-nav:not([hidden]){opacity:1;transform:translateY(0);animation:none}
+  .mobile-nav[hidden]{pointer-events:none}
+  .mobile-nav:not([hidden])>a{animation:menu-link-arrive var(--motion-normal) var(--motion-ease) both}
+  .mobile-nav:not([hidden])>a:nth-child(2){animation-delay:40ms}
+  .mobile-nav:not([hidden])>a:nth-child(3){animation-delay:80ms}
+  .mobile-nav:not([hidden])>a:nth-child(4){animation-delay:120ms}
+  @starting-style{.mobile-nav:not([hidden]){opacity:0;transform:translateY(-8px)}}
+}
+@keyframes menu-link-arrive{from{opacity:.5;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+
+/* A full story is a normal document navigation. Native snapshots carry its artwork. */
+@view-transition{navigation:auto}
+.site-header{view-transition-name:site-header}
+::view-transition{pointer-events:none}
+::view-transition-group(*){animation-duration:var(--motion-normal);animation-timing-function:var(--motion-ease)}
+::view-transition-old(root){animation:document-leave var(--motion-fast) ease-out both}
+::view-transition-new(root){animation:document-arrive var(--motion-normal) var(--motion-ease) both}
+::view-transition-group(site-header){animation-duration:var(--motion-fast)}
+@keyframes document-leave{to{opacity:0}}
+@keyframes document-arrive{from{opacity:0}to{opacity:1}}
+
+@media(prefers-reduced-motion:reduce),(forced-colors:active){
+  @view-transition{navigation:none}
+  .detail-cover-visual,.site-header{view-transition-name:none!important}
+  .hero-scroll-layer,.mobile-nav:not([hidden])>a{animation:none!important;transform:none!important}
+  .mobile-nav,.menu-icon>span{transition:none!important}
+  .catalogue-item,.filter-selection{transform:none!important}
+  .mobile-nav:not([hidden])>a{opacity:1}
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
+}

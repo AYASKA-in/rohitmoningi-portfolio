@@ -14,7 +14,7 @@ export const metadata = pageMetadata(seoPages.home);
 export default function Home() {
  return <><JsonLd data={webPageSchema(seoPages.home)} /><CursorLight /><EditorialDepth />
  <section data-motion-route="/" className="hero" aria-labelledby="hero-title">
-   <SceneDepth /><div className="hero-scene"><Image src="/images/hero.webp" alt="" fill priority sizes="100vw" className="hero-image" /></div><div className="hero-vignette" />
+   <SceneDepth /><div className="hero-scroll-layer"><div className="hero-scene"><Image src="/images/hero.webp" alt="" fill priority sizes="100vw" className="hero-image" /></div></div><div className="hero-vignette" />
    <div className="hero-content wrap"><p className="hero-role">SOFTWARE ENGINEER <span>·</span> BENGALURU, INDIA</p>
      <h1 id="hero-title"><span className="hero-name-line"><span data-hero-word>ROHIT</span></span>{" "}<span className="hero-name-line"><span data-hero-word>MONINGI<span className="hero-period">.</span></span></span></h1>
      <p className="hero-specialty">DevOps. Cloud. Full stack.</p>

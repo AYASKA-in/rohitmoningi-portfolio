@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Menu, Search, X } from "lucide-react";
+import { ArrowUpRight, Search } from "lucide-react";
 import { motion, MotionConfig } from "motion/react";
 import { motionTokens as tokens } from "@/lib/motion-tokens";
 
@@ -24,9 +24,9 @@ export function SiteHeader() {
       <div className="header-actions">
         <Link className="icon-button search-link" href="/projects#search" aria-label="Search projects"><Search size={19} /></Link>
         <a className="resume-link" href="/resume.pdf" target="_blank" rel="noreferrer">Resume <ArrowUpRight size={16} /><span className="sr-only"> (PDF, opens in new tab)</span></a>
-        <button ref={toggle} type="button" className="icon-button menu-toggle" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? "Close navigation" : "Open navigation"}>{open ? <X size={22} /> : <Menu size={22} />}</button>
+        <button ref={toggle} type="button" className="icon-button menu-toggle" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? "Close navigation" : "Open navigation"}><span className="menu-icon" aria-hidden="true"><span /><span /></span></button>
       </div>
     </div>
-    <nav id="mobile-nav" className="mobile-nav" aria-label="Mobile navigation" hidden={!open}>{links.map(l => <Link key={l.href} href={l.href} onClick={() => setOpen(false)} aria-current={active(l.href) ? "page" : undefined}>{l.label}<ArrowUpRight size={16} /></Link>)}</nav>
+    <nav id="mobile-nav" className="mobile-nav" aria-label="Mobile navigation" hidden={!open} inert={!open}>{links.map(l => <Link key={l.href} href={l.href} onClick={() => setOpen(false)} aria-current={active(l.href) ? "page" : undefined}>{l.label}<ArrowUpRight size={16} /></Link>)}</nav>
   </header>;
 }

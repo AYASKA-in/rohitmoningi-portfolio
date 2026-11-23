@@ -62,10 +62,10 @@ test("page transitions retain ordinary navigation and one main heading", async (
 test("career and project content remain usable without JavaScript", async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto("http://127.0.0.1:3000/about");
+  await page.goto(new URL("/about", process.env.BASE_URL || "http://127.0.0.1:3000").href);
   await expect(page.locator('[data-career-status="upcoming"]')).toBeVisible();
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  await page.goto("http://127.0.0.1:3000/projects");
+  await page.goto(new URL("/projects", process.env.BASE_URL || "http://127.0.0.1:3000").href);
   await page.getByRole("link", { name: "Bike Auction Platform — view project" }).click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Bike Auction Platform");
   await context.close();
