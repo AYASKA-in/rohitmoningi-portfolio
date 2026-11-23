@@ -1,102 +1,23 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { projectMap, projects } from "@/components/portfolio-data";
-import { ProjectContent } from "@/components/project-content";
-
-const BASE_URL = "https://rohitmoningi.in";
-
-type ProjectPageProps = {
-  params: Promise<{ slug: string }>;
-};
-
-export async function generateStaticParams() {
-  return projects.map((project) => ({
-    slug: project.slug,
-  }));
+import { projectMap, projects } from "@/lib/content";
+import { site } from "@/lib/site";
+import { ProjectDetail } from "@/components/project-detail";
+import { projectMetadata, personId, webPageSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/json-ld";
+type Props = { params: Promise<{ slug: string }> };
+export const dynamicParams = false;
+export function generateStaticParams() { return projects.map(p => ({ slug: p.slug })); }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+ const { slug } = await params; const p = projectMap.get(slug); if (!p) return {};
+ return projectMetadata(p);
 }
-
-export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const project = projectMap[slug];
-  if (!project) return {};
-
-  const title = project.title;
-  const description = project.summary || project.description;
-  const canonicalUrl = `${BASE_URL}/projects/${slug}`;
-  const keywords = [project.category, ...project.tags, ...project.stack, "Rohit Moningi", "Portfolio"];
-
-  return {
-    title,
-    description,
-    alternates: { canonical: canonicalUrl },
-    keywords,
-    openGraph: {
-      title: `${title} — Rohit Moningi`,
-      description,
-      type: "article",
-      url: canonicalUrl,
-      siteName: "Rohit Moningi Portfolio",
-      locale: "en_IN",
-      images: [{ url: project.image, width: 1600, height: 813, alt: title }],
-      publishedTime: new Date(project.date).toISOString(),
-      tags: [project.category, ...project.tags],
-      section: project.category,
-      authors: ["https://www.linkedin.com/in/moningi-rohit"],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${title} — Rohit Moningi`,
-      description,
-      images: [project.image],
-    },
-    robots: { index: true, follow: true },
-  };
-}
-
-export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { slug } = await params;
-  const project = projectMap[slug];
-
-  if (!project) {
-    notFound();
-  }
-
-  const currentIndex = projects.findIndex((p) => p.slug === slug);
-  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
-  const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
-
-  const canonicalUrl = `${BASE_URL}/projects/${slug}`;
-
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
-      { "@type": "ListItem", position: 2, name: "Projects", item: `${BASE_URL}/#projects` },
-      { "@type": "ListItem", position: 3, name: project.title, item: canonicalUrl },
-    ],
-  };
-
-  const creativeWorkJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: project.title,
-    description: project.summary || project.description,
-    url: canonicalUrl,
-    keywords: [project.category, ...project.tags, ...project.stack],
-    author: { "@type": "Person", name: "Rohit Moningi" },
-    datePublished: project.date,
-  };
-
-  return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(creativeWorkJsonLd) }} />
-      <ProjectContent
-        project={project}
-        prevProject={prevProject}
-        nextProject={nextProject}
-      />
-    </>
-  );
+export default async function ProjectPage({ params }: Props) {
+ const { slug } = await params; const p = projectMap.get(slug); if (!p) notFound();
+ const url = `${site.url}/projects/${slug}`;
+ const json = { "@context": "https://schema.org", "@graph": [
+   { ...webPageSchema({ title: p.title, description: p.description, path: `/projects/${slug}` }), mainEntity: { "@id": `${url}#project` } },
+   { "@type": "CreativeWork", "@id": `${url}#project`, name: p.title, description: p.description, url, author: { "@id": personId }, mainEntityOfPage: { "@id": `${url}#webpage` }, image: `${url}/opengraph-image`, keywords: p.stack.join(", "), inLanguage: "en-IN" },
+ ] };
+ return <div data-motion-route={`/projects/${slug}`} className="detail-page"><JsonLd data={json} /><ProjectDetail project={p} /></div>;
 }

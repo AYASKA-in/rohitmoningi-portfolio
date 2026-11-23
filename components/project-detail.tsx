@@ -1,0 +1,20 @@
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight, Github } from "lucide-react";
+import { Project, projects } from "@/lib/content";
+import { ProjectImage } from "./project-image";
+import { ProjectCard } from "./project-card";
+
+import { Breadcrumbs } from "./breadcrumbs";
+
+export function ProjectDetail({ project: p, preview = false }: { project: Project; preview?: boolean }) {
+  const CoverTitle = preview ? "h1" : "p";
+  const StoryTitle = preview ? "h2" : "h1";
+  return <article className={`project-detail ${preview ? "is-preview" : ""}`}>
+    <div className="detail-cover"><ProjectImage src={p.image} alt="" priority sizes="(max-width: 1000px) 100vw, 1200px" /><div className="detail-shade" /><div className="detail-cover-copy">{!preview && <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Work", href: "/projects" }, { name: p.title, href: `/projects/${p.slug}` }]} />}<p className="eyebrow">{p.category} <span> / </span> {p.status}</p><CoverTitle className="detail-display" id={preview ? "preview-title" : undefined}>{p.shortTitle.replace(/\.$/, "")}<span className="red">.</span></CoverTitle><p className="detail-strap">{p.strap}</p></div></div>
+    <div className="detail-body"><div className="detail-intro"><div><StoryTitle className="detail-intro-heading">{p.title}</StoryTitle><p className="detail-summary">{p.summary}</p></div><dl><div><dt>My contribution</dt><dd>{p.role}</dd></div><div><dt>Project status</dt><dd>{p.status}</dd></div></dl></div><div className="detail-actions">{preview && <a href={`/projects/${p.slug}`} className="button button-light">Read full story <ArrowRight size={17} /></a>}{p.externalUrl && <a href={p.externalUrl} target="_blank" rel="noreferrer" className={`button ${preview ? "button-quiet" : "button-light"}`}>{p.externalLabel || "Visit website"} <ArrowUpRight size={17} /><span className="sr-only"> (opens in new tab)</span></a>}{p.code && <a href={p.code} target="_blank" rel="noreferrer" className="button button-quiet"><Github size={17} /> View source<span className="sr-only"> (opens in new tab)</span></a>}</div><div className="stack-tags" aria-label="Technologies">{p.stack.map(s => <span key={s}>{s}</span>)}</div>
+    {p.notes && <p className="project-note">{p.notes}</p>}
+    {!preview && <><div className="story-grid"><section><p className="eyebrow">01 / THE BRIEF</p><h2>The problem behind the project.</h2>{p.overview.map(s => <p key={s}>{s}</p>)}</section><section><p className="eyebrow">02 / THE BUILD</p><h2>Where the engineering matters.</h2><ul>{p.highlights.map(s => <li key={s}>{s}</li>)}</ul></section></div>{p.screenshot && <figure className="project-screen"><div><ProjectImage src={p.screenshot} alt={`${p.title} — ${p.coverKind === "Synthetic demo screenshot" ? "synthetic demo workspace" : "application interface"}`} sizes="(max-width: 1000px) 100vw, 1100px" /></div><figcaption>{p.coverKind === "Public sign-in screen" ? "Public sign-in screen. Private records are not shown." : p.slug === "bike-auction" || p.slug === "cleartrail" ? "Application capture from the public repository, using demo data." : "A view of the project interface."}</figcaption></figure>}<section className="results-section"><p className="eyebrow">03 / THE DELIVERY</p><h2>What came together.</h2><ul>{(p.results || p.highlights).map(s => <li key={s}>{s}</li>)}</ul></section><div className="story-end"><span>Have a similar challenge?</span><Link href="/contact" className="text-link">Let’s build something <ArrowUpRight size={17} /></Link></div></>}
+    {preview && <p className="preview-footer">{p.coverKind === "Concept artwork" ? "Cover illustration. Explore the full story for implementation details." : "Explore the full story for the context and implementation."}</p>}
+    </div>{!preview && <section className="related-projects"><div className="section-heading"><h2>Keep exploring<span className="red">.</span></h2><Link href="/projects" className="text-link">All projects <ArrowRight size={16} /></Link></div><div className="related-grid">{projects.filter(x => x.slug !== p.slug).slice(0, 3).map(x => <ProjectCard key={x.slug} project={x} />)}</div></section>}
+  </article>;
+}
